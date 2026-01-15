@@ -306,6 +306,8 @@ M.highlight_selection = function(selection)
     -- Use the non-deprecated module if available.
     local highlight = vim.hl or vim.highlight
 
+    vim.opt.cursorline = false
+    vim.opt.cursorcolumn = false
     highlight.range(
         0,
         M.namespace.highlight,
@@ -321,6 +323,9 @@ end
 -- Clears all nvim-surround highlights for the buffer.
 M.clear_highlights = function()
     vim.api.nvim_buf_clear_namespace(0, M.namespace.highlight, 0, -1)
+
+    vim.opt.cursorline = true
+    vim.opt.cursorcolumn = true
     -- Force the screen to clear the highlight immediately
     vim.cmd.redraw()
 end
